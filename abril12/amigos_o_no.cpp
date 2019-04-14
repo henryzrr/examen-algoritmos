@@ -45,12 +45,22 @@ int main(){
         if(g1==amistad.end()||g2==amistad.end()) continue;
         
         int res=100000;
-        for(auto&xx:(*g1).second){
+        auto gg1 = (*g1).second;
+        auto gg2 = (*g2).second;
+        auto ggg1 = gg1.begin();
+        auto ggg2 = gg2.begin();
+        while(ggg1!=gg1.end()||ggg2!=gg2.end()){
+            int resta = abs((*ggg1) - (*ggg2));
+            res = resta<res&&resta>0?resta:res;
+            g1++;
+            g2++;
+        }
+        /*for(auto&xx:(*g1).second){
             for(auto&yy:(*g2).second){
                 int resta = abs(xx-yy);
                 res = resta<res && resta>0?resta:res;
             }
-        }
+        }*/
     
         if(res>0&&res<=d){
             amigos a;
