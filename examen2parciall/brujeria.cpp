@@ -4,10 +4,7 @@ using namespace std;
 int pesos[1000],nroDulces,pesofin,pesotot,cont,i,j,sum,cases,resp[2],aux;
 vector<vector<int>>dp,ind;
 vector<int>resf;
-/*void iniciardp(){
-    j = nroDulces<pesofin?pesofin:nroDulces;
-    for(i=0;i<=j;i++) dp[0][i]=dp[i][0]=0; 
-}*/ 
+
 void iniciardp(){
     for(i=0;i<=nroDulces;i++){
         dp[i].reserve(pesofin+1);
@@ -35,22 +32,17 @@ int main(){
         iniciardp();
         for(i=1;i<=nroDulces;i++){
             for(j=1;j<=pesofin;j++){
-               // puts("asd");
-                //printf("%i ",pesos[i]<j?0:j-pesos[i]);
                 if(j<pesos[i]){
                     dp[i][j]=dp[i-1][j];
                     ind[i][j]=ind[i-1][j];
                 }
                 else{
                     sum = pesos[i]+dp[i-1][j-pesos[i]];
-                    //printf("%i-%i ",sum,j);
                     dp[i][j]=sum>dp[i-1][j]?sum:dp[i-1][j];
                     ind[i][j]=sum>=dp[i-1][j]?i:ind[i-1][j];    
                 }
             }
-            //puts("");
         }
-        //puts("");
         cont=0;
         for(i=1;i<=nroDulces;i++){
             if(dp[i][pesofin]==pesofin && pesos[i]==pesos[ind[i][pesofin]]){
@@ -60,13 +52,6 @@ int main(){
             }
         }
         
-        //printf("%i\n",pesotot);
-       /* for(i=1;i<=nroDulces;i++){
-            for(j=1;j<=pesofin;j++){
-                printf("%i ",dp[i][j]);
-            }
-            puts("");
-        }*/
         if(cont!=1) puts("Brian, Kevin faltan caramelos !!!");
         else{
             i=resp[0];
