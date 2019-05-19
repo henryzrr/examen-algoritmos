@@ -1,19 +1,22 @@
 #include<stdio.h>
 #include<vector>
-#include<map>
+#include<unordered_map>
 #include<set>
 #include<string>
 #include<algorithm>
 #include<iostream>
 #include<stdlib.h>
+#include<unordered_set>
 using namespace std;
 ///--------------------------
-typedef struct amigos{
+typedef struct amigo{
     string a;
     string b;
+    
 }amigo;
-map<string,vector<int>>amistad;
-amigo lsres[10005];
+
+unordered_map<string,vector<int>>amistad;
+amigo lsres[10100];
 
 int d,n,t,nroAmigos;
 string a1,a2,aux[2];
@@ -26,12 +29,12 @@ int main(){
     for(int i=0;i<n;i++){
      
         cin>>a1>>a2>>t;
-        
         amistad[a1+a2].push_back(t);
         set<string>s;
         s.insert(a1);
         s.insert(a2);
         paresamigos.insert(s);
+
     }
     nroAmigos =0;
     for(auto &x:paresamigos){
@@ -49,11 +52,12 @@ int main(){
         auto gg2 = (*g2).second;
         auto ggg1 = gg1.begin();
         auto ggg2 = gg2.begin();
+
         while(ggg1!=gg1.end()||ggg2!=gg2.end()){
-            int resta = abs((*ggg1) - (*ggg2));
+            int resta = abs((*ggg2) - (*ggg1));
             res = resta<res&&resta>0?resta:res;
-            g1++;
-            g2++;
+            ggg1++;
+            ggg2++;
         }
         /*for(auto&xx:(*g1).second){
             for(auto&yy:(*g2).second){
@@ -63,7 +67,7 @@ int main(){
         }*/
     
         if(res>0&&res<=d){
-            amigos a;
+            amigo a;
             a.a=aux[0];
             a.b=aux[1];
             lsres[nroAmigos]=a;

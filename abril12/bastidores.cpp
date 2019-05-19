@@ -12,7 +12,7 @@ int main(){
     scanf("%i",&cases);
     while(cases--){
         scanf("%i %i",&bast,&groups);
-        ls.assign(bast+1,0);
+        ls.assign(200,0);
         res.reserve(groups);
         for(int i=0;i<bast;i++){
             scanf("%i",&ti);
@@ -20,9 +20,9 @@ int main(){
         }
      
         int aux =0;
-        for(int i=bast;i>0;i--){
+        for(int i=199;i>0;i--){
             while(ls[i]>0){
-                if(!res[aux].empty() && res[aux].front()==i)break;
+                if(!res[aux].empty()) if(res[aux].front()==i)break;
                 res[aux].push_front(i);
                 aux++;
                 ls[i]--;
@@ -33,7 +33,16 @@ int main(){
         for(int i=groups-1;i>=0;i--){
             printf("Grupo %i: [",j);
             int num;
-            while(true){
+            do{
+                num = res[i].front();
+                res[i].pop_front();
+                if(!res[i].empty()){
+                    printf("%i, ",num);
+                }else{
+                    printf("%i]\n",num);
+                }
+            }while(!res[i].empty());
+            /*while(true){
                 num = res[i].front();
                 res[i].pop_front();
                 if(!res[i].empty()){
@@ -42,9 +51,10 @@ int main(){
                     printf("%i]\n",num);
                     break;
                 }
-            }
+            }*/
             j++;
         }
+        //res.clear();
 
     }
     return 0;
