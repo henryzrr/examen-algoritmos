@@ -10,8 +10,8 @@ typedef struct  nodo{
 
 unordered_map<int,int>um;
 unordered_map<int,int>::iterator it;
-//vector<nodos>grafo;
-int grafo[10000][10000];
+vector<vector<int>>grafo;
+//int grafo[10000][10000];
 int visitado[10000];
 stack<int>pila;
 int cases,path,i,ant,nodo,auxnodo;
@@ -29,8 +29,8 @@ void iniciarGrafo(){
 int main(){
 	scanf("%i",&cases);
 	while(cases--){	
-		iniciarGrafo();
-		//grafo.reserve(10000);
+		//iniciarGrafo();
+		grafo.reserve(10000);
 		scanf("%i",&path);
 		i=0;
 		first=true;
@@ -47,22 +47,14 @@ int main(){
 				ant=auxnodo;
 				first=false;
 			}else{
-				//(grafo[ant]).ar.push_back(auxnodo);
-				grafo[ant][auxnodo]=1;
+				grafo[ant].push_back(auxnodo);
+				//grafo[ant][auxnodo]=1;
 				//printf("%i %i\n",ant,grafo[ant].ar[auxnodo]);
 				ant=auxnodo;
 			}
-
+			printf("%i ",auxnodo);
 		}
-		pila.push(0);
-		while(!pila.empty()){
-			auxnodo = pila.top();
-			pila.pop();
-			for(int j=0;j<i;j++){
 				
-			}
-		}
-				/*
 		puts("");
 		for(int j=0;j<i;j++){
 			printf("%i: ",j);
@@ -71,7 +63,7 @@ int main(){
 			}
 			puts("");
 		}
-		*/
+		
 		um.clear();
 	}
 	return 0;
